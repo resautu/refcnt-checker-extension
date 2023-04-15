@@ -6,7 +6,7 @@ export function activate(context:ExtensionContext) {
 	// Add command to the extension context
 	context.subscriptions.push(commands.registerCommand("ref_checker.Checker_Ref", () => {
 		logDucument(context);
-		CheckPanel.render(context.extensionUri);
+		CheckPanel.render(context);
 	}));
   }
 

@@ -14,3 +14,13 @@ export function logDucument(context:vscode.ExtensionContext){
 		fs.writeFileSync(filePath, document.getText());
 		}
 }
+export function writeLog(path: string){
+    const fs = require('fs');
+	const lines = fs.readFileSync(path, 'utf-8').split('\n');
+    let logInform = '';
+    for (const line of lines) {
+        logInform += '<li class="error-text">' + line + '</li>';
+    }
+	console.log(logInform);
+	return logInform;
+}

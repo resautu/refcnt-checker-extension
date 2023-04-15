@@ -1,5 +1,5 @@
 .text_color{
-    color: blue;
+    color: white;
 }
 h1{
     color: rgb(73, 119, 163);
@@ -9,7 +9,7 @@ div{
     height: 300px;
     border-radius: 25px;
     box-sizing: border-box;
-    border: white;
+    border: 5px solid white;
     display: flex;
 }
 .error-text{

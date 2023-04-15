@@ -1,19 +1,20 @@
-import { Disposable, Webview, WebviewPanel, window, Uri, ViewColumn } from "vscode";
-import {getUri} from "./utils";
+import { Disposable, Webview, WebviewPanel, window, Uri, ViewColumn, ExtensionContext } from "vscode";
+import {getUri, writeLog} from "./utils";
 
 export class CheckPanel {
     public static currentPanel: CheckPanel | undefined;
     private readonly _panel: WebviewPanel;
     private _disposables: Disposable[] = [];
-    private constructor(panel: WebviewPanel, extensionUri: Uri) {
+    private extensionPath: String = './';
+    private constructor(panel: WebviewPanel, extensionUri: Uri, extensionPath: string) {
       this._panel = panel;
       this._panel.onDidDispose(() => this.dispose(), null, this._disposables);
-  
+      this.extensionPath = extensionPath;
       this._panel.webview.html = this._getWebviewContent(this._panel.webview, extensionUri);
       this._setWebviewMessageListener(this._panel.webview);
     }
   
-    public static render(extensionUri: Uri) {
+    public static render(context:ExtensionContext) {
       
       if (CheckPanel.currentPanel) {
         CheckPanel.currentPanel._panel.reveal(ViewColumn.One);
@@ -25,15 +26,15 @@ export class CheckPanel {
           {
             enableScripts: true,
             localResourceRoots: [
-                Uri.joinPath(extensionUri, "out"), 
-                Uri.joinPath(extensionUri, "assets"),
-                Uri.joinPath(extensionUri, "modules"),
-                Uri.joinPath(extensionUri, "cache")
+                Uri.joinPath(context.extensionUri, "out"), 
+                Uri.joinPath(context.extensionUri, "assets"),
+                Uri.joinPath(context.extensionUri, "modules"),
+                Uri.joinPath(context.extensionUri, "cache")
             ],
           }
         );
   
-        CheckPanel.currentPanel = new CheckPanel(panel, extensionUri);
+        CheckPanel.currentPanel = new CheckPanel(panel, context.extensionUri, context.extensionPath);
       }
     }
   
@@ -51,10 +52,13 @@ export class CheckPanel {
     }
   
     private _getWebviewContent(webview: Webview, extensionUri: Uri) {
+      const path = require('path');
+
       const stylesUri = getUri(webview, extensionUri, ["assets", "checkform.css"]);
       const myImage = getUri(webview, extensionUri, ["assets", "1.png"]);
       const jsModule = getUri(webview, extensionUri, ["modules", "misc.js"]);
-      const logPath = getUri(webview, extensionUri, ["cache", "log"]);
+      const logPath = path.join(this.extensionPath, './cache/log');
+      //console.log(logPath);
       return /*html*/ `
         <!DOCTYPE html>
         <html lang="en">
@@ -67,10 +71,10 @@ export class CheckPanel {
             <h1 class="text_color">Results of Ref-Cnt checker checker</h1>
           </head>
           <body>
-            <script>writeLog(${logPath})</script>
             <div>
-              <ul>
-              <script>writeLog(${logPath})</script>
+              <ul>` 
+              + writeLog(logPath) + 
+              /*html*/`
               </ul>
             </div>
                       <!--<vscode-button id="howdy">Howdy!</vscode-button>-->
