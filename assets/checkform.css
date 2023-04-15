@@ -1,0 +1,20 @@
+.text_color{
+    color: blue;
+}
+h1{
+    color: rgb(73, 119, 163);
+}
+div{
+    width: 800px;
+    height: 300px;
+    border-radius: 25px;
+    box-sizing: border-box;
+    border: white;
+    display: flex;
+}
+.error-text{
+    color:red;
+    font-size: medium;
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 10px;
+}
