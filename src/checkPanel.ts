@@ -58,7 +58,7 @@ export class CheckPanel {
       const myImage = getUri(webview, extensionUri, ["assets", "1.png"]);
       const jsModule = getUri(webview, extensionUri, ["modules", "misc.js"]);
       const logPath = path.join(this.extensionPath, './cache/log');
-      //console.log(logPath);
+      console.log(logPath);
       return /*html*/ `
         <!DOCTYPE html>
         <html lang="en">
@@ -68,11 +68,12 @@ export class CheckPanel {
             <title>Checker Result!</title>
             <link href="${stylesUri}" rel="stylesheet">
             <script src="${jsModule}"></script>
-            <h1 class="text_color">Results of Ref-Cnt checker checker</h1>
+            <h1 class="text_color">Results of Ref-Cnt checker</h1>
           </head>
           <body>
             <div>
-              <ul>` 
+              <ul>
+              ` 
               + writeLog(logPath) + 
               /*html*/`
               </ul>
