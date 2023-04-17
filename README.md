@@ -24,8 +24,7 @@ refcnt-checker-extension
 ## Preliminary idea
 
 - use vscode api to get source code files
-- The frontend calls clang to compile source code files to llvm IR(of course, this can be handed over to the backend as well)
-- The frontend calls the llvm pass encapsulated in the backend
+- The frontend activate backend to use clang to compile source code files to llvm IR
 - The backend checks ref-cnt through llvm pass and puts the information in a log file
 - The frontend reads the log file and present it on vscode webview
 - Below is the flow chart:
