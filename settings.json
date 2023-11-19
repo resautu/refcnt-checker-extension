@@ -1,0 +1,26 @@
+{
+    "ToolConfig": {
+        "clang": "clang-16",
+        "opt": "opt-16",
+        "module": "/home/ruoqiu/refcnt-checker/refcountChecker/test/naive.c",
+        "args": [
+            "-I",
+            "/usr/include/python3.10"
+        ]
+    },
+    "AnalysisConfig": {
+        "analysisMode": "inter",
+        "entry": "test",
+        "verbose": true
+    },
+    "Plugins": [
+        {
+            "name": "LLMPlugin",
+            "cmd": "python /Users/ziqi/Work/pyc/workaround/refcountChecker/LLMPlugin/RC_openai.py"
+        }
+    ],
+    "LLMPlugin": {
+      "model": "gpt-3.5-turbo",
+      "apiKey": "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"
+    }
+}

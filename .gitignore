@@ -4,3 +4,5 @@ node_modules
 .vscode-test/
 *.vsix
 print_tree.py
+.vecode
+cache

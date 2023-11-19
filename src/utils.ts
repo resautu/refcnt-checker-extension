@@ -3,16 +3,25 @@ export function getUri(webview: vscode.Webview, extensionUri: vscode.Uri, pathLi
     return webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, ...pathList));
 }
 export function logDucument(context:vscode.ExtensionContext){
+	
 	const fs = require('fs');
 	const path = require('path');
 
 	const editor = vscode.window.activeTextEditor;
+	
 	if (editor) {
+		if(editor?.document.languageId !== 'c'){
+			vscode.window.showErrorMessage('Please open a C file!');
+			return false;
+		}
 		const document = editor.document;
 		const pluginPath = context.extensionPath;
 		const filePath = path.join(pluginPath, './cache/src.c');
 		fs.writeFileSync(filePath, document.getText());
+		return true;
 	}
+	vscode.window.showErrorMessage('Please open a C file!');
+	return false;
 }
 
 function findLine(content: string, target: string){
@@ -36,7 +45,7 @@ export function writeLog(path: string, ducumentPath: string){
     let logInform = '';
 	let beginLines = content.split('\n').filter((line: string) => line.trim().startsWith('<runOnModule>'));
 	for (const line of beginLines){
-		logInform += '<h3 class="inform-text">' + line + '</h3>';
+		logInform += '<p class="inform-text">' + line + '</p>';
 	}
 
 	let hshMap = new Map<string, number | undefined>();
