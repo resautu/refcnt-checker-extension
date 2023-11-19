@@ -2,6 +2,33 @@ import * as vscode from "vscode";
 export function getUri(webview: vscode.Webview, extensionUri: vscode.Uri, pathList: string[]) {
     return webview.asWebviewUri(vscode.Uri.joinPath(extensionUri, ...pathList));
 }
+const fs = require('fs');
+// 读取JSON文件
+const readJsonFile = (filePath: string): any => {
+	const data = fs.readFileSync(filePath, 'utf-8');
+	return JSON.parse(data);
+};
+  
+  // 写入JSON文件
+const writeJsonFile = (filePath: string, data: any): void => {
+	const jsonString = JSON.stringify(data, null, 2);
+	fs.writeFileSync(filePath, jsonString, 'utf-8');
+};
+
+const updateJsonValue = (filePath: string, newValue: string): void => {
+	// 读取JSON文件
+	const jsonData = readJsonFile(filePath);
+  
+	// 修改值
+	if (jsonData && jsonData.ToolConfig && jsonData.ToolConfig.module) {
+	  jsonData.ToolConfig.module = newValue;
+	}
+  
+	// 写入JSON文件
+	writeJsonFile(filePath, jsonData);
+};
+
+
 export function logDucument(context:vscode.ExtensionContext){
 	
 	const fs = require('fs');
@@ -18,6 +45,8 @@ export function logDucument(context:vscode.ExtensionContext){
 		const pluginPath = context.extensionPath;
 		const filePath = path.join(pluginPath, './cache/src.c');
 		fs.writeFileSync(filePath, document.getText());
+		const jsonPath = path.join(pluginPath, './settings.json');
+		updateJsonValue(jsonPath, filePath);
 		return true;
 	}
 	vscode.window.showErrorMessage('Please open a C file!');
@@ -38,7 +67,7 @@ function findLine(content: string, target: string){
 
 export function writeLog(path: string, ducumentPath: string){
     const fs = require('fs');
-	const content = fs.readFileSync(path, 'utf-8');
+	const content = fs.readFileSync(path, 'utf-8').replace(/\x1B\[[0-9;]*[mK]/g, '');
 	const srcFile = fs.readFileSync(ducumentPath, 'utf-8');
 
 	let lines = content.split('\n').filter((line: string) => line.trim().startsWith('<bugReport>'));

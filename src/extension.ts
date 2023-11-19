@@ -2,20 +2,22 @@ import { commands, ExtensionContext, window, extensions, Uri } from "vscode";
 import { CheckPanel } from './checkPanel';
 import { logDucument } from './utils';
 import { execSync } from 'child_process';
+import path = require("path");
 
 function excuteTool(context:ExtensionContext) {
 	if(!logDucument(context)){
 		return;
 	}
 
-	const currentWorkingDirectory = process.cwd();
-	const targetDirectory = 'bin';
+	const currentWorkingDirectory = context.extensionPath;
+	console.log(currentWorkingDirectory);
+	const targetDirectory = './tool/bin';
 	try {
 		// 切换到目标目录
-		process.chdir(targetDirectory);
-	  
+		process.chdir(path.join(currentWorkingDirectory, targetDirectory));
+		console.log(process.cwd());
 		// 要执行的系统命令（在目标目录执行tool程序）
-		const command = './tool ../settings.json > ./cache/log'; // 请根据你的实际情况替换为正确的命令
+		const command = './tool > ../../cache/blog 2>../../cache/log'; // 请根据你的实际情况替换为正确的命令
 	  
 		// 使用execSync同步执行系统命令
 		const output = execSync(command, { encoding: 'utf-8' });

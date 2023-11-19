@@ -12,6 +12,8 @@ div{
     box-sizing: border-box;
     border: 2px solid white;
     display: flex;
+    flex-direction: column;
+    flex-direction: raw;
 }
 .error-text{
     color:red;

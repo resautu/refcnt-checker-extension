@@ -51,7 +51,7 @@
     "webpack-cli": "^5.0.1"
   },
   "dependencies": {
-    "vsce": "^2.15.0"
+    "vsce": "^1.97.0"
   },
   "repository": {
     "type": "git",
