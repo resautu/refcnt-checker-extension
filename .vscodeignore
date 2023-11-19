@@ -14,3 +14,5 @@ vsc-extension-quickstart.md
 ./README.assets
 README.md
 .git
+cache/log
+print_tree.py

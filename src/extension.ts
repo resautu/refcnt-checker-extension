@@ -15,7 +15,7 @@ function excuteTool(context:ExtensionContext) {
 		process.chdir(targetDirectory);
 	  
 		// 要执行的系统命令（在目标目录执行tool程序）
-		const command = './tool ../settings.json'; // 请根据你的实际情况替换为正确的命令
+		const command = './tool ../settings.json > ./cache/log'; // 请根据你的实际情况替换为正确的命令
 	  
 		// 使用execSync同步执行系统命令
 		const output = execSync(command, { encoding: 'utf-8' });
