@@ -36,3 +36,48 @@ finish code frame and can get source files and can present log, also there has a
 
 ![image-20230416215852233](./README.assets/image-20230416215852233.png)
 
+## Usage method
+
+### Install:
+
+You can simply download .vsix file from release.
+
+Take Linux as an example, you can just use command as below in your terminal:
+
+```shell
+code --install-externsion refcnt-checker-0.0.1.vsix
+```
+
+And then you can enjoy your ref-cnt checker life.
+
+### Environment：
+
+```shell
+llvm version:16.0
+unix operation system(for example: linux, MAC)
+```
+
+#### Usage:
+
+- You can just use shortcut key: Ctrl+Shift+p in vscode to get command line
+
+- Before you check a source file first, you need to change settings.json file first. Of course, you needn't to find settings.json in your messy file system. You can just use command below in vecode command line:
+
+  ```shell
+  ref_checker.Settings
+  ```
+
+  Then you will be surprised to see settings.json will pop up, and modify content for your source file specifically, like entry, check model(inter or intra).
+
+- Then you can just use command below to check your file.
+
+  ```shell
+  ref_checker.Checker_Ref
+  ```
+
+  And wait for minutes, check reporter will be presented.
+
+## Acknowledge
+
+If you like out work, please click a star for us. Your support is the greatest encouragement to us!
+
