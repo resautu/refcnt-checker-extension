@@ -1,2 +1,20 @@
-Your code has error in line1, because of INCREF
-Your code has error in line99, beacese of DECREF
+====================analyses starts=======================
+<runOnModule> analysis mode: intra
+<runOnModule> entry function: test
+<refcntAnalysis> memref: AAMemRef__No__0
+<refcntAnalysis> memref: AAMemRef__No__0
+<doAnalysis> intra analysis started
+<doAnalysis> function: test
+<intraAnalysis>---------AA sets begin---------
+AAMemRef__No__0(size:3): 
+item, call, , 
+
+<doAnalysis>---------AA sets end---------
+<transferNode> call: PyList_New
+<transferNode> memref: AAMemRef__No__0
+<transferNode> call: _Py_DECREF
+<transferNode> memref: AAMemRef__No__0
+<bugReport> bugs found:
+<bugReport> Error:MLK;Memory:AAMemRef__No__0;Function:test;Line:0;Variable:item;
+<bugReport> Error:MLK;Memory:AAMemRef__No__0;Function:test;Line:0;Variable:call;
+=====================analyses ends========================

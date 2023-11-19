@@ -58,6 +58,7 @@ export class CheckPanel {
       const myImage = getUri(webview, extensionUri, ["assets", "1.png"]);
       const jsModule = getUri(webview, extensionUri, ["modules", "misc.js"]);
       const logPath = path.join(this.extensionPath, './cache/log');
+      const documentPath = path.join(this.extensionPath, './cache/src.c');
       console.log(logPath);
       return /*html*/ `
         <!DOCTYPE html>
@@ -74,7 +75,7 @@ export class CheckPanel {
             <div>
               <ul>
               ` 
-              + writeLog(logPath) + 
+              + writeLog(logPath, documentPath) + 
               /*html*/`
               </ul>
             </div>
