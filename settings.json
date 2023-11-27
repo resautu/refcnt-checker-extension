@@ -9,8 +9,9 @@
     ]
   },
   "AnalysisConfig": {
-    "analysisMode": "inter",
-    "entry": "PyInit_spam",
+    "analysisMode": "intra",
+    "entry": "sum_list",
+    "AAstrategy": "scoped-noalias",
     "verbose": true
   },
   "Plugins": [
