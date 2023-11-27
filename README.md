@@ -5,7 +5,7 @@
     <p align="center">
    &#128512 <a href="https://github.com/ziqiwww" target="_blank">ziqiwww@NJU</a> <br>
       &#128512 <a href="https://github.com/resautu" target="_blank">resautu@NJU</a> <br>
-       &#128512<span>Yaocheng Hou@NJU</span> <br>
+       &#128512<span>Chengyao Hou@NJU</span> <br>
 </p>
 </center>
 
