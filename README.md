@@ -56,7 +56,7 @@ You can simply download .vsix file from release.
 Take Linux as an example, you can just use command as below in your terminal:
 
 ```shell
-code --install-externsion refcnt-checker-0.0.1.vsix
+code --install-extension refcnt-checker-0.0.1.vsix
 ```
 
 And then you can enjoy your ref-cnt checker life.
